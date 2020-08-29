@@ -1,7 +1,9 @@
 # 라즈베리파이 얼굴 인식 데이터 수집
 import os
 import cv2
+
 Face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
+
 
 cap = cv2.VideoCapture(0)
 cap.set(3,640) # 넓이 설정
@@ -15,9 +17,9 @@ count=0
 
 while(True):
     ret, frame = cap.read()
-    frame = cv2.flip(frame,-1) # 상하반전, 0: 좌우반전, 1: 정산, 2: 상하좌우반전
+    frame = cv2.flip(frame,1) # 상하반전, 0: 좌우반전, 1: 정산, 2: 상하좌우반전
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    faces = Face_detector.detectMultiScale(gray,1.3,5)
+    faces = Face_detector.detectMultiScale(gray,1.3,3)
     for (x,y,w,h) in faces:
         cv2.rectangle(frame,(x,y,),(x+w,y+h),(255,0,0),2)
         count+=1
@@ -30,7 +32,7 @@ while(True):
     k = cv2.waitKey(100) & 0xff
     if k==27:  # press 'ESC' to quit ESC를 누르면 종료
         break
-    elif count >=50:
+    elif count >=30:
         break
 
 print('\n [INFO] Exiting Program and cleanup stuff')

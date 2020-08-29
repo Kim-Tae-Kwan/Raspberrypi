@@ -8,14 +8,14 @@ import time
 #     time.sleep(1000)
 #     camera.stop_preview()
 
-# 영상 녹화 프로그램
-# with picamera.PiCamera() as camera:
-#     camera.resolution = (640,480)
-#     camera.start_preview()
-#     camera.start_recording('kim.h264')
-#     camera.wait_recording(60)
-#     camera.stop_recording()
-#     camera.stop_preview()
+#영상 녹화 프로그램
+with picamera.PiCamera() as camera:
+    camera.resolution = (640,480)
+    camera.start_preview()
+    camera.start_recording('kim.h264')
+    camera.wait_recording(60)
+    camera.stop_recording()
+    camera.stop_preview()
 
 # 영상 캡쳐 프로그램
 # with picamera.PiCamera() as camera:

@@ -5,7 +5,7 @@ from PIL import Image
 import os
 #얼굴 데이터셋 경로 (;3)
 path='dataset'
-recognizer = cv2.face.createLBPHFaceRecognizer()
+recognizer = cv2.face.LBPHFaceRecognizer_create()
 detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
 
 #이미지들을 가져오고 테이터 라벨링하는 함수

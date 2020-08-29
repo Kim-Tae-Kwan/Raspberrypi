@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 import os
 
-recognizer = cv2.face.createLBPHFaceRecognizer()
-recognizer.load('trainer.yml')
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer.read('trainer.yml')
 cascadePath = "haarcascades/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath)
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -13,7 +13,7 @@ id = 0
 
 # names related to ids: example ==> loze: id=1,  etc
 # 이런식으로 사용자의 이름을 사용자 수만큼 추가해준다.
-names = ['None', 'KIMTK', 'ljy', 'chs', 'ksw']
+names = ['None', 'CHOI', 'KIM', 'chs', 'ksw']
 
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)
@@ -26,12 +26,12 @@ minH = 0.1*cam.get(4)
 
 while True:
     ret, img =cam.read()
-    img = cv2.flip(img, -1) # Flip vertically
+    img = cv2.flip(img, 1) # Flip vertically
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(
         gray,
-        scaleFactor = 1.2,
+        scaleFactor = 1.1,
         minNeighbors = 5,
         minSize = (int(minW), int(minH)),
        )  
