@@ -18,9 +18,9 @@ def on_subscribe(client, userdata, mid, granted_qos):
 
 def on_message(client, userdata, msg):
     json_data = json.loads(str(msg.payload.decode("utf-8")))
-    dev_id = json_data["dev_id"]
-    state = json_data["state"]
-    
+    #dev_id = json_data["dev_id"]
+    #state = json_data["state"]
+    dev_id = json_data["Curr_time"]
     
     if dev_id == 'TKKim':
         print(dev_id)
@@ -35,7 +35,8 @@ def process_alarm(state):
     elif state == 'OFF':
         GPIO.output(RED, 0)
         GPIO.output(GREEN, 255)
-        GPIO.output(BLUE, 0) 
+        GPIO.output(BLUE, 0) y
+        
 
 # RGB LED 모듈 초기화
 GPIO.setmode(GPIO.BCM)
@@ -58,9 +59,9 @@ try:
     client.on_subscribe = on_subscribe
     client.on_message = on_message
     # address : localhost, port: 1883 에 연결
-    client.connect('210.119.12.52', 1883)
+    client.connect('210.119.12.60', 1883)
     # common topic 으로 메세지 발행
-    client.subscribe('home/device/control/', 1)
+    client.subscribe('home/device/data/', 1)
     client.loop_forever()
 finally:
     GPIO.cleanup()
